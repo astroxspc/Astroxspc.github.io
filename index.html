@@ -5,102 +5,105 @@
 <title>Astrox Space Journal</title>
 
 <style>
-html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    overflow: hidden;
-    background: #000;
-    font-family: Arial, sans-serif;
-    color: white;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
 }
 
-/* Smooth Galaxy Background */
-body::before {
-    content: "";
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle at center, #0a1f3c 0%, #000 70%);
-    z-index: -2;
+body {
+  height: 100vh;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 40%, #0b1d3a 0%, #000 70%);
+  color: white;
 }
 
-/* Nebula Glow */
-body::after {
-    content: "";
-    position: fixed;
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(circle, rgba(128,0,255,0.25), transparent 70%);
-    top: 30%;
-    left: 20%;
-    filter: blur(100px);
-    z-index: -1;
-}
-
-/* Stars */
+/* STAR FIELD */
 .star {
-    position: absolute;
-    background: white;
-    border-radius: 50%;
-    animation: twinkle infinite alternate;
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.8;
+  animation: twinkle infinite alternate;
 }
 
 @keyframes twinkle {
-    from {opacity: 0.3;}
-    to {opacity: 1;}
+  from { opacity: 0.3; }
+  to { opacity: 1; }
 }
 
-/* Planets */
-.planet {
-    position: absolute;
-    border-radius: 50%;
-    box-shadow: inset -20px -20px 50px rgba(0,0,0,0.7),
-                0 0 40px rgba(255,255,255,0.15);
-}
-
-.planet1 {
-    width: 140px;
-    height: 140px;
-    background: radial-gradient(circle at 30% 30%, #4cc9f0, #03045e);
-    top: 15%;
-    left: 8%;
-}
-
-.planet2 {
-    width: 100px;
-    height: 100px;
-    background: radial-gradient(circle at 40% 40%, #ff9e00, #7b2d00);
-    bottom: 15%;
-    right: 8%;
-}
-
-/* Black Hole */
+/* BLACK HOLE */
 .blackhole {
-    position: absolute;
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    background: radial-gradient(circle, black 45%, purple 65%, transparent 75%);
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    animation: rotate 8s linear infinite;
-    box-shadow: 0 0 60px purple;
+  position: absolute;
+  width: 280px;
+  height: 280px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, black 55%, #3a0066 70%, transparent 80%);
+  box-shadow: 0 0 120px #7a00ff;
+  animation: rotate 12s linear infinite;
 }
 
 @keyframes rotate {
-    from {transform: translate(-50%, -50%) rotate(0deg);}
-    to {transform: translate(-50%, -50%) rotate(360deg);}
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
-/* Title */
+/* REALISTIC PLANET */
+.planet {
+  position: absolute;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.planet::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.4), transparent 60%);
+}
+
+.planet::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 70% 70%, rgba(0,0,0,0.8), transparent 70%);
+}
+
+/* Blue Planet */
+.blue {
+  width: 180px;
+  height: 180px;
+  left: 8%;
+  top: 25%;
+  background: radial-gradient(circle at 40% 40%, #4cc9f0, #001d3d);
+  box-shadow: 0 0 40px rgba(0,150,255,0.4);
+}
+
+/* Orange Planet */
+.orange {
+  width: 140px;
+  height: 140px;
+  right: 8%;
+  bottom: 20%;
+  background: radial-gradient(circle at 40% 40%, #ffb703, #7b2d00);
+  box-shadow: 0 0 40px rgba(255,140,0,0.4);
+}
+
+/* TITLE */
 h1 {
-    text-align: center;
-    margin-top: 30px;
-    font-size: 26px;
-    letter-spacing: 3px;
-    text-shadow: 0 0 15px cyan, 0 0 30px blue;
+  position: absolute;
+  top: 40px;
+  width: 100%;
+  text-align: center;
+  font-size: 24px;
+  letter-spacing: 4px;
+  text-shadow: 0 0 20px cyan;
 }
 </style>
 </head>
@@ -109,21 +112,21 @@ h1 {
 
 <h1>ASTROX SPACE JOURNAL</h1>
 
-<div class="planet planet1"></div>
-<div class="planet planet2"></div>
+<div class="planet blue"></div>
+<div class="planet orange"></div>
 <div class="blackhole"></div>
 
 <script>
-for (let i = 0; i < 300; i++) {
-    let star = document.createElement("div");
-    star.className = "star";
-    let size = Math.random() * 3;
-    star.style.width = size + "px";
-    star.style.height = size + "px";
-    star.style.top = Math.random() * 100 + "vh";
-    star.style.left = Math.random() * 100 + "vw";
-    star.style.animationDuration = (Math.random() * 3 + 1) + "s";
-    document.body.appendChild(star);
+for (let i = 0; i < 250; i++) {
+  let star = document.createElement("div");
+  star.className = "star";
+  let size = Math.random() * 2;
+  star.style.width = size + "px";
+  star.style.height = size + "px";
+  star.style.top = Math.random() * 100 + "vh";
+  star.style.left = Math.random() * 100 + "vw";
+  star.style.animationDuration = (Math.random() * 3 + 1) + "s";
+  document.body.appendChild(star);
 }
 </script>
 
